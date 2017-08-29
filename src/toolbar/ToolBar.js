@@ -15,6 +15,14 @@ import ShowSelectedOnlyButton from './ShowSelectedOnlyButton';
 import SearchField from './SearchField';
 import ClearSearchButton from './ClearSearchButton';
 
+
+const tmp = {
+  id: Math.floor(Math.random () * 99999) +1,
+  name : 'foo',
+  price : 'foobar'
+}
+
+
 class ToolBar extends Component {
 
   static modalSeq = 0;
@@ -115,9 +123,10 @@ class ToolBar extends Component {
   }
 
   handleSaveBtnClick = (newRow) => {
-    if (!this.validateNewRow(newRow)) { // validation fail
-      return;
-    }
+
+    // if (!this.validateNewRow(newRow)) { // validation fail
+    //   return;
+    // }
     const msg = this.props.onAddRow(newRow);
     if (msg !== false) {
       this.afterHandleSaveBtnClick(msg);
@@ -224,10 +233,18 @@ class ToolBar extends Component {
     let exportCSVBtn = null;
     let showSelectedOnlyBtn = null;
 
+
+    //renderCustomBtn(cb, params, componentName, eventName, event)
     if (this.props.enableInsert) {
       if (this.props.insertBtn) {
-        insertBtn = this.renderCustomBtn(this.props.insertBtn,
-          [ this.handleModalOpen ], InsertButton.name, 'onClick', this.handleModalOpen);
+
+        console.log('foo me once');
+        //console.log('_',this.renderCustomBtn(this.props.insertBtn, [ this.handleModalOpen ], InsertButton.name, 'onClick', this.handleModalOpen()))
+
+        //insertBtn = this.renderCustomBtn(this.props.insertBtn, [ this.handleModalOpen ], InsertButton.name, 'onClick', this.handleModalOpen())
+        // insertBtn = this.renderCustomBtn(this.props.insertBtn,
+        //   [ this.handleModalOpen ], InsertButton.name, 'onClick', this.handleModalOpen);
+
       } else {
         insertBtn = (
           <InsertButton btnText={ this.props.insertText }

@@ -2,15 +2,21 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Const from '../Const';
 
+
 const insertBtnDefaultClass = 'react-bs-table-add-btn';
 
 class InsertButton extends Component {
   render() {
+    // const newObj = {
+    //   id: ' ',
+    //   name: ' ',
+    //   price: ' '
+    // };
     const {
       btnContextual,
       className,
-      onClick,
       btnGlyphicon,
+      onClick,
       btnText,
       children,
       ...rest
@@ -19,9 +25,9 @@ class InsertButton extends Component {
       (<span><i className={ `fa glyphicon ${btnGlyphicon}` }></i> { btnText }</span>);
     return (
       <button type='button'
-        className={ `btn ${btnContextual} ${insertBtnDefaultClass} ${className}` }
-        onClick={ onClick }
-        { ...rest }>
+              className={ `btn ${btnContextual} ${insertBtnDefaultClass} ${className}` }
+              onClick={ onClick }
+              { ...rest }>
         { content }
       </button>
     );
@@ -29,6 +35,7 @@ class InsertButton extends Component {
 }
 
 InsertButton.propTypes = {
+  noModal : PropTypes.bool,
   btnText: PropTypes.string,
   btnContextual: PropTypes.string,
   className: PropTypes.string,
@@ -36,6 +43,7 @@ InsertButton.propTypes = {
   btnGlyphicon: PropTypes.string
 };
 InsertButton.defaultProps = {
+  noModal: false,
   btnText: Const.INSERT_BTN_TEXT,
   btnContextual: 'btn-info',
   className: '',

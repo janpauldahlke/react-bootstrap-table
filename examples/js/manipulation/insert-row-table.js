@@ -2,7 +2,7 @@
 /* eslint no-alert: 0 */
 /* eslint guard-for-in: 0 */
 import React from 'react';
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import { BootstrapTable, TableHeaderColumn, InsertButton } from 'react-bootstrap-table';
 
 
 const products = [];
@@ -23,21 +23,40 @@ addProducts(5);
 
 function onAfterInsertRow(row) {
   let newRowStr = '';
-
   for (const prop in row) {
     newRowStr += prop + ': ' + row[prop] + ' \n';
   }
   alert('The new row is:\n ' + newRowStr);
 }
 
-const options = {
-  afterInsertRow: onAfterInsertRow   // A hook for after insert rows
-};
+const tmp = {
+  id: 'f123',
+  name : 'foo',
+  price : 'foobar'
+}
+
 
 export default class InsertRowTable extends React.Component {
-  render() {
+
+  handleInsertButtonClick = (onClick) => {
+    onClick();
+  }
+
+  createCustomInsertButton = (onClick) => {
     return (
-      <BootstrapTable data={ products } insertRow={ true } options={ options }>
+        <InsertButton
+          noModal={ true }
+          btnText='CustomInsertText'
+          onClick={ () => this.handleInsertButtonClick(onClick) }/>
+    );
+  }
+
+  render() {
+    const options = {
+      insertBtn: this.createCustomInsertButton
+    };
+    return (
+      <BootstrapTable data={ products } insertRow={ true } options={ options }  >
           <TableHeaderColumn dataField='id' isKey={ true }>Product ID</TableHeaderColumn>
           <TableHeaderColumn dataField='name'>Product Name</TableHeaderColumn>
           <TableHeaderColumn dataField='price'>Product Price</TableHeaderColumn>
